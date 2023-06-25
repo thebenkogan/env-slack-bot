@@ -1,6 +1,11 @@
 import { validateSlackRequest } from "@/utils/validate";
 import { NextRequest } from "next/server";
-import { handleCreate, handleFree, handleList, handleUse } from "./_handlers";
+import {
+  handleCreate,
+  handleFree,
+  handleList,
+  handleUse,
+} from "../../utils/handlers";
 import { error } from "@/utils/response";
 
 export const config = {

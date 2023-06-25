@@ -15,6 +15,7 @@ export function formatSay(text: string) {
   return NextResponse.json({
     blocks: [
       {
+        response_type: "in_channel",
         type: "section",
         text: {
           type: "mrkdwn",
