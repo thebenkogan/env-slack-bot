@@ -100,7 +100,7 @@ export async function handleFree(params: URLSearchParams) {
   }
 
   await freeEnv(env);
-  return formatSay(`<!here> \`${env}\` is now free!`);
+  return formatSay(`\`${env}\` is now free!`);
 }
 
 export async function handleList(params: URLSearchParams) {
