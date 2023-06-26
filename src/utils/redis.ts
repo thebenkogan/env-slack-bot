@@ -34,3 +34,7 @@ export async function listEnvs(): Promise<[string, EnvHash][]> {
   );
   return envs.map((env, i) => [env, hashes[i]!]);
 }
+
+export async function deleteEnv(env: string) {
+  return await redis.del(env);
+}

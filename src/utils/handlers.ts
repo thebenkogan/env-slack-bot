@@ -1,5 +1,6 @@
 import {
   createEnv,
+  deleteEnv,
   freeEnv,
   getEnvInfo,
   listEnvs,
@@ -20,6 +21,21 @@ export async function handleCreate(params: URLSearchParams) {
 
   await createEnv(env);
   return formatSay(`Created environment: \`${env}\`.`);
+}
+
+export async function handleDelete(params: URLSearchParams) {
+  const env = params.get("text")?.split(" ")[0];
+  if (!env) {
+    return formatSay("Please provide a name. For example: `/delete dev`.");
+  }
+
+  const envInfo = await getEnvInfo(env);
+  if (!envInfo) {
+    return formatSay("No environment found with that name.");
+  }
+
+  await deleteEnv(env);
+  return formatSay(`Deleted environment: \`${env}\`.`);
 }
 
 export async function handleUse(params: URLSearchParams) {

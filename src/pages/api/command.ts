@@ -2,6 +2,7 @@ import { validateSlackRequest } from "@/utils/validate";
 import { NextRequest } from "next/server";
 import {
   handleCreate,
+  handleDelete,
   handleFree,
   handleList,
   handleUse,
@@ -32,6 +33,8 @@ const handler = async (request: NextRequest) => {
       return handleFree(params);
     case "/list":
       return handleList(params);
+    case "/delete":
+      return handleDelete(params);
     default:
       return error("Invalid command", 400);
   }
