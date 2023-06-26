@@ -25,15 +25,15 @@ const handler = async (request: NextRequest) => {
   const command = params.get("command");
 
   switch (command) {
-    case "/create":
+    case "/env-create":
       return handleCreate(params);
-    case "/use":
+    case "/env-use":
       return handleUse(params);
-    case "/free":
+    case "/env-free":
       return handleFree(params);
-    case "/list":
+    case "/env-list":
       return handleList(params);
-    case "/delete":
+    case "/env-delete":
       return handleDelete(params);
     default:
       return error("Invalid command", 400);
