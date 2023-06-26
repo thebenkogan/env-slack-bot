@@ -8,8 +8,7 @@ type EnvHash = {
 };
 
 export async function createEnv(name: string) {
-  const newEnv: EnvHash = { user: null, description: null };
-  return await redis.hset(name, newEnv);
+  return await redis.hset(name, { user: null, description: null });
 }
 
 export async function getEnvInfo(env: string): Promise<EnvHash | null> {

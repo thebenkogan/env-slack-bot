@@ -12,8 +12,14 @@ export async function handleCreate(params: URLSearchParams) {
   if (!env) {
     return formatSay("Please provide a name. For example: `/create dev`.");
   }
+
+  const envInfo = await getEnvInfo(env);
+  if (envInfo) {
+    return formatSay(`\`${env}\` already exists.`);
+  }
+
   await createEnv(env);
-  return formatSay(`Created environment: \`${env}\``);
+  return formatSay(`Created environment: \`${env}\`.`);
 }
 
 export async function handleUse(params: URLSearchParams) {
@@ -22,7 +28,7 @@ export async function handleUse(params: URLSearchParams) {
   const description = splitText.slice(1).join(" ") || null;
   if (!env) {
     return formatSay(
-      "Please provide a name and optionally a description. For example: `/use dev the next big thing`."
+      "Please provide a name and optionally a description. For example: `/use dev super cool thing`."
     );
   }
 
@@ -36,9 +42,9 @@ export async function handleUse(params: URLSearchParams) {
   const { user: existingUser, description: existingDescription } = envInfo;
   if (existingUser) {
     return formatSay(
-      `\`${env}\` is currently in use by <@${existingUser}>. ${
+      `\`${env}\` is in use by <@${existingUser}>.${
         existingDescription
-          ? `They are currently working on: ${existingDescription}.`
+          ? `\nThey are currently working on: ${existingDescription}.`
           : ""
       }`
     );
@@ -66,7 +72,7 @@ export async function handleFree(params: URLSearchParams) {
   const { user: existingUser } = envInfo;
   if (!existingUser) {
     return formatSay(
-      `\`${env}\` is not currently in use. Use it with \`/use ${env}\``
+      `\`${env}\` is not currently in use. Use it with \`/use ${env}\`.`
     );
   }
 
@@ -87,9 +93,9 @@ export async function handleList(params: URLSearchParams) {
     if (!user) {
       return `\`${env}\` is free.`;
     }
-    return `\`${env}\` is in use by <@${user}>. ${
-      description ? `They are currently working on: ${description}.` : ""
+    return `\`${env}\` is in use by <@${user}>.${
+      description ? `\nThey are currently working on: ${description}.` : ""
     }`;
   });
-  return formatSay(messages.join("\n"));
+  return formatSay(messages.join("\n\n"));
 }
