@@ -11,7 +11,7 @@ import { formatSay } from "@/utils/response";
 export async function handleCreate(params: URLSearchParams) {
   const env = params.get("text")?.split(" ")[0];
   if (!env) {
-    return formatSay("Please provide a name.\nFor example: `/create dev`.");
+    return formatSay("Please provide a name.\nFor example: `/env-create dev`.");
   }
 
   const envInfo = await getEnvInfo(env);
@@ -26,7 +26,7 @@ export async function handleCreate(params: URLSearchParams) {
 export async function handleDelete(params: URLSearchParams) {
   const env = params.get("text")?.split(" ")[0];
   if (!env) {
-    return formatSay("Please provide a name.\nFor example: `/delete dev`.");
+    return formatSay("Please provide a name.\nFor example: `/env-delete dev`.");
   }
 
   const envInfo = await getEnvInfo(env);
@@ -44,14 +44,14 @@ export async function handleUse(params: URLSearchParams) {
   const description = splitText.slice(1).join(" ") || null;
   if (!env) {
     return formatSay(
-      "Please provide a name and optionally a description.\nFor example: `/use dev super cool thing`."
+      "Please provide a name and optionally a description.\nFor example: `/env-use dev super cool thing`."
     );
   }
 
   const envInfo = await getEnvInfo(env);
   if (!envInfo) {
     return formatSay(
-      `No environment found with that name.\nCreate it with \`/create ${env}\`.`
+      `No environment found with that name.\nCreate it with \`/env-create ${env}\`.`
     );
   }
 
@@ -75,20 +75,20 @@ export async function handleUse(params: URLSearchParams) {
 export async function handleFree(params: URLSearchParams) {
   const env = params.get("text")?.split(" ")[0];
   if (!env) {
-    return formatSay("Please provide a name.\nFor example: `/free dev`.");
+    return formatSay("Please provide a name.\nFor example: `/env-free dev`.");
   }
 
   const envInfo = await getEnvInfo(env);
   if (!envInfo) {
     return formatSay(
-      `No environment found with that name.\nCreate it with \`/create ${env}\`.`
+      `No environment found with that name.\nCreate it with \`/env-create ${env}\`.`
     );
   }
 
   const { user: existingUser } = envInfo;
   if (!existingUser) {
     return formatSay(
-      `\`${env}\` is not currently in use.\nUse it with \`/use ${env}\`.`
+      `\`${env}\` is not currently in use.\nUse it with \`/env-use ${env}\`.`
     );
   }
 
