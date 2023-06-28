@@ -11,7 +11,7 @@ import { error } from "@/utils/response";
 
 export const config = {
   runtime: "edge",
-  regions: ["iad1"],
+  regions: ["pdx1"],
 };
 
 const handler = async (request: NextRequest) => {
