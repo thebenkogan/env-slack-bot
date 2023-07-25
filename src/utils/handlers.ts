@@ -109,7 +109,7 @@ export async function handleList(params: URLSearchParams) {
     if (!user) {
       return `\`${env}\` is free.`;
     }
-    return `\`${env}\` is in use by <@${user}>.${
+    return `\`${env}\` is in use by \`<@${user}>\`.${
       description ? `\nThey are currently working on: ${description}.` : ""
     }`;
   });
